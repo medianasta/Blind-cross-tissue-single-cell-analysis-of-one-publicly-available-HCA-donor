@@ -1,0 +1,35 @@
+cell_group	Blood	Fat	Large_Intestine	Muscle	Small_Intestine
+Adipocyte-like	0.0	0.003	0.0	0.0	0.0
+Adipose progenitor	0.0	0.452	0.0	0.002	0.0
+B cell	0.002	0.0	0.038	0.0	0.043
+BEST4+ cell	0.0	0.0	0.081	0.0	0.018
+CD4 T cell	0.01	0.07	0.234	0.018	0.511
+CD8 T cell	0.002	0.027	0.148	0.004	0.197
+Colonocyte	0.0	0.0	0.248	0.0	0.0
+Endothelial	0.0	0.2	0.001	0.071	0.0
+Enterocyte	0.0	0.0	0.0	0.0	0.065
+Enteroendocrine cell	0.0	0.0	0.005	0.0	0.001
+Fibro-adipogenic progenitor	0.0	0.001	0.0	0.421	0.0
+Fibroblast	0.0	0.025	0.071	0.155	0.007
+Glia	0.0	0.0	0.048	0.0	0.006
+Goblet cell	0.0	0.0	0.036	0.0	0.027
+Lymphatic endothelial	0.0	0.002	0.0	0.002	0.0
+Macrophage	0.0	0.085	0.002	0.056	0.004
+Mast cell	0.0	0.0	0.003	0.0	0.007
+Mesothelial cell	0.0	0.0	0.0	0.001	0.0
+Monocyte	0.219	0.0	0.0	0.0	0.0
+Myofiber	0.0	0.0	0.0	0.014	0.0
+NK cell	0.015	0.002	0.0	0.001	0.0
+Neutrophil	0.664	0.06	0.0	0.004	0.0
+Paneth cell	0.0	0.0	0.0	0.0	0.002
+Pericyte	0.0	0.03	0.0	0.04	0.0
+Plasma cell	0.023	0.002	0.028	0.0	0.03
+Platelet	0.058	0.0	0.0	0.0	0.0
+Regulatory T cell	0.007	0.0	0.002	0.0	0.001
+Satellite cell	0.0	0.0	0.0	0.203	0.0
+Smooth muscle	0.0	0.041	0.003	0.005	0.0
+Stem/progenitor	0.0	0.0	0.0	0.0	0.051
+T cell (mixed)	0.0	0.0	0.005	0.0	0.001
+Transit-amplifying	0.0	0.0	0.008	0.0	0.013
+Tuft cell	0.0	0.0	0.001	0.0	0.014
+γδ T cell	0.0	0.0	0.035	0.0	0.003

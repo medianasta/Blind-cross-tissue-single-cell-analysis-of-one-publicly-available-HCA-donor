@@ -1,0 +1,38 @@
+	Blood	Fat	Large_Intestine	Muscle	Small_Intestine
+B cell	15	0	469	0	441
+basophil	9	0	0	0	0
+CD4 T cell	142	0	2872	57	5257
+CD8 T cell	39	0	2105	46	2231
+Dendritic cell	3	0	0	0	0
+Endothelial	0	1876	31	645	15
+enterocyte of epithelium of large intestine	0	0	2764	0	0
+enterocyte of epithelium of small intestine	0	0	0	0	1100
+Erythroid/Platelet	1719	0	0	4	0
+fast muscle cell	0	0	0	44	0
+Fibroblast	0	2692	852	0	88
+hematopoietic stem cell	12	0	0	0	0
+intestinal crypt stem cell of large intestine	0	0	114	0	0
+intestinal crypt stem cell of small intestine	0	0	0	0	71
+intestinal enteroendocrine cell	0	0	19	0	12
+intestinal tuft cell	0	0	12	0	146
+large intestine goblet cell	0	0	385	0	0
+leucocyte	0	3	0	0	0
+Macrophage	0	623	0	497	0
+Mast cell	0	0	38	4	65
+Mesenchymal stromal	0	1300	0	4858	0
+mesothelial cell	0	0	0	11	0
+Monocyte	1875	0	543	0	61
+Neutrophil	5834	439	22	0	64
+NK cell	99	19	0	0	0
+paneth cell of epithelium of large intestine	0	0	831	0	0
+paneth cell of epithelium of small intestine	0	0	0	0	177
+pericyte cell	0	0	0	373	0
+Plasma cell	206	10	330	0	303
+skeletal muscle satellite stem cell	0	0	0	1648	0
+slow muscle cell	0	0	0	29	0
+small intestine goblet cell	0	0	0	0	300
+smooth muscle cell	0	11	0	43	0
+T cell (unspecified)	9	697	0	88	0
+tendon cell	0	0	0	47	0
+transit amplifying cell of large intestine	0	0	52	0	0
+transit amplifying cell of small intestine	0	0	0	0	127
