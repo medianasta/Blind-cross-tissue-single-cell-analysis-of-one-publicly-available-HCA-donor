@@ -40,6 +40,8 @@ and their per-cell statistics; fifteen metadata columns in total.
 
 No data are stored in this repository.
 
+<img width="1347" height="976" alt="umap_tissue" src="https://github.com/user-attachments/assets/2ed7ec6f-1ee3-4c0c-8ea4-0b450a99e4ee" />
+
 ### 3. The pipeline
 #### 3.1 Annotation and integrity 
 **What it does.** Reads count matrices and metadata exported from R, transposes them into the cells × genes layout, assembles a single annotated object, and separates the published annotations into a sealed file that nothing downstream reads.
@@ -50,6 +52,8 @@ No data are stored in this repository.
 1. The counts are integers, so this  is raw data and not something already normalised.
 2. Every row is matched to its own metadata. Recomputing library size and detected genes per cell and correlating them against the supplied statistics gives a correlation of exactly 1.0000, but only against the decontX layer. That revealed something not stated in the original metadata: the authors' per-cell statistics were computed on corrected counts, not raw ones.
 3. The donor is male in all five tissues. XIST is detected in at most 1.2% of cells and the Y-linked genes are present everywhere, which also rules out a sample swap between tissues.
+
+
 
 #### 3.2 Quality control from the data, not from convention
 **What it does.** Computes per-cell quality metrics, inspects their distributions per tissue and per channel, sets every threshold from what those distributions show, scores dissociation stress, detects doublets, and removes cells only after a provisional clustering makes within-cluster comparisons possible.
@@ -64,6 +68,9 @@ No data are stored in this repository.
 5. Dissociation stress is kept as a covariate rather than removed, because it is confounded with tissue: muscle 1.75 > fat 1.09 > large intestine 0.78 > small intestine 0.63 > blood 0.47, with tissue explaining 36% of the score's variance.
 6. 3,076 cells removed (6.42%). Blood loses 17.7%, almost entirely red cells; the solid tissues lose 3.0–4.1% each, so their relative composition is preserved.
 
+<img width="4136" height="490" alt="blood_low_complexity_bands" src="https://github.com/user-attachments/assets/50a8aba1-934e-40f0-abb2-301926a64cfa" />
+
+
 #### 3.3 Clustering and blind annotation 
 **What it does.** Rebuilds the embedding from scratch on the cleaned cells, decides which count layer to cluster on, corrects one technical effect in one place, assigns lineages, re-clusters each lineage separately, annotates every cluster from marker genes, and cross-checks the immune annotation against an external classifier.
 
@@ -76,6 +83,16 @@ No data are stored in this repository.
 4. Three populations turned out not to be what they first appeared. About 460 immune cells had been pulled into the epithelial lineage by the epithelial RNA floating in the gut samples; they were recovered by matching each one to its nearest immune neighbours in a gene space that excludes those contaminating genes. Nearly 400 further cells carry both an endothelial and a pericyte program in the same droplet — pericytes still attached to the capillary they wrap around — which the doublet detector missed because such pairs are common enough to look like a genuine population. A smaller group of probable immune–epithelial pairs was excluded on the same logic.
 5. The external classifier agreed on most populations and was useful where it disagreed. It correctly flagged a regulatory T-cell population that had been missed, which marker genes then confirmed and which was split out — recorded as prompted by the classifier. It also called every neutrophil state a classical monocyte with high confidence; that call was rejected on evidence, since those cells carry neutrophil-specific genes in 83–99% of cases and essentially no MHC class II, while monocytes carry it in 58%.
 6. The outcome is 73 cell types in 34 groups, every one with its marker evidence recorded.
+
+<img width="498" height="520" alt="umap_final_cell_groups" src="https://github.com/user-attachments/assets/04e2a90e-9161-4a13-bbf5-e5aafa8ee9e9" />
+
+<img width="1742" height="1182" alt="dotplot__lineage_markers" src="https://github.com/user-attachments/assets/c2fc2f61-f13a-48db-a07d-42addbcd5463" />
+
+
+**UMAP for immune cells**
+
+<img width="1134" height="1048" alt="umap_immune_harmony" src="https://github.com/user-attachments/assets/848ad239-2893-473d-9c82-3c1ea13fab37" />
+
 
 #### 3.4 Feasibility analysis
 **What it does.** Counts cells per cell type per channel and fixes the gene universe for the secretome analysis. It produces no results.
@@ -102,6 +119,8 @@ No data are stored in this repository.
 10. Residency genes are core, homing genes are tissue-specific. Testing each tissue against the others, CD69, ITGAE, CXCR6 and PDCD1 are invariant across all four. What varies is the egress module and the homing receptors.
 11. Antigen presentation is dominated by cell type, modulated by tissue. Class II scores span a wide range between cell types but at most a narrow range within a cell type across tissues. The notable result is that vascular endothelium in fat and muscle expresses the complete class II module above the resident macrophages beside it — the transcription factor CIITA included. That low macrophage signal independently matches the LYVE1⁺ perivascular subtype the blind annotation had assigned from unrelated markers.
 
+<img width="1016" height="567" alt="cd4_sample_dendrogram" src="https://github.com/user-attachments/assets/ae3523f1-f387-46cf-b103-b7627ac9b5b3" />
+
 
 #### 3.6 Secretome analysis
 **What it does.** Takes every annotated secreted protein as the search space, maps each one to a producing cell lineage, compares the same cell types between fat and muscle, and compares the two fat depots.
@@ -117,6 +136,13 @@ No data are stored in this repository.
 6. Fat macrophages carry a coherent lipid-handling secretome containing no stress-flagged genes, matching the lipid-associated subtype annotated blind two notebooks earlier.
 7. The two fat depots give the opposite answer to the two tissues. They differ by a set of developmental positional genes shared across nearly every cell type — subcutaneous and mesenteric markers that fell out of a comparison using nothing but the depot label parsed from a file name. The program is confined to the mesenchymal compartment and is never highest in an immune cell type, so the signal in immune cells is spill from the mesenchymal producers.
 8. Cell-type-specific depot differences are not supported. The number of apparently depot-specific genes scales almost perfectly inversely with how many cells that type has, so it tracks sampling noise rather than biology
+
+**Secretome: ambient contribution per gene, per library**
+<img width="1615" height="490" alt="secretome_margin" src="https://github.com/user-attachments/assets/b5e7d6a8-132a-4545-b31d-0c3d658f7c2f" />
+
+**Mesenchymal correlation**
+<img width="2128" height="1397" alt="h3_mesenchymal_correlation" src="https://github.com/user-attachments/assets/734e46e9-55d9-40fc-bfbb-e95d074138a7" />
+
 
 #### 3.7 Validation
 **What it does.** Opens the withheld annotations for the first time and compares them to the blind labels using the metric and mapping fixed in advance.
@@ -151,6 +177,9 @@ Where the difference is granularity, not error. Smooth muscle cells and pericyte
 Where the analysis had already flagged the ambiguity. Platelets were labelled "platelet, neutrophil-associated" here because the platelet markers co-occurred with neutrophil genes; the reference calls them neutrophils. Both describe the same observation.
 
 One disagreement is self-inflicted and was left in place. "Paneth cell" was deliberately not accepted as a reference equivalent for BEST4⁺ cells when the mapping was written. Allowing it would have raised the headline figure. The mapping was committed before unsealing and was not revised, which is the only reason the number means anything.
+
+<img width="2573" height="1954" alt="validation_confusion_compact" src="https://github.com/user-attachments/assets/afd226f5-6a98-4959-b7c1-6d66a293a658" />
+
 
 ### 7. Conclusions 
 1. Memory T cells are organised by the kind of tissue they inhabit, not merely by tissue identity. Barrier and non-barrier tissues separate at the statistical floor this design permits, and the genes behind the split are about tissue retention and homing.
